@@ -44,8 +44,6 @@ set linebreak        " 整词换行
 
 " 按下F3自动补全代码，注意该映射语句后不能有其他字符，包括tab；否则按下F3会自动补全一些乱码
 ""map <F12> <C-X><C-O>
-" 按下F2根据头文件内关键字补全
-""imap <C-F2> <C-X><C-I>
 map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 set completeopt=longest,menu
 let OmniCpp_GlobalScopeSearch = 1  " 0 or 1

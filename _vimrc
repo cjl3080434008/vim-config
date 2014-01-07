@@ -88,17 +88,17 @@ let g:jedi#goto_assignments_command = "<leader>g"
 let g:jedi#goto_definitions_command = "<leader>d"
 let g:jedi#documentation_command = "K"
 let g:jedi#usages_command = "<leader>n"
+"智能补全可以用c-x c-o来做
 let g:jedi#completions_command = "<C-Space>"
 let g:jedi#rename_command = "<leader>r"
-let g:jedi#completions_enabled = 1
+let g:jedi#show_call_signatures = "1"
+let g:jedi#popup_on_dot = 1
 
 "====================ctrlp===================
 let g:ctrlp_map = '<c-p>'
 
 "====================pythoncomplete==========
 autocmd FileType python runtime! autoload/pythoncomplete.vim
-
-
 
 "=======================key map==========
 map <c-j> <c-w>j
@@ -124,3 +124,15 @@ endfunction
 inoremap <silent>j <C-R>=OmniPopup('j')<CR>
 inoremap <silent>k <C-R>=OmniPopup('k')<CR>
 
+inoremap ( ()<ESC>i
+inoremap ) <c-r>=ClosePair(')')<CR>
+inoremap { {}<ESC>i
+inoremap } <c-r>=ClosePair('}')<CR>
+inoremap [ []<ESC>i
+inoremap ] <c-r>=ClosePair(']')<CR>
+
+imap ff <Esc>k 
+set whichwrap=b,s,<,>,[,]  "让退格，空格，上下箭头遇到行首行尾时自动移到下一行（包括insert模式）
+"使用tab键来代替%进行匹配跳转
+nnoremap <tab> %
+vnoremap <tab> %
