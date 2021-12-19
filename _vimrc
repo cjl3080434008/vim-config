@@ -1,138 +1,117 @@
-set nocompatible
-source $VIMRUNTIME/vimrc_example.vim
-source $VIMRUNTIME/mswin.vim
-behave mswin
 set nu
-language messages zh_CN.utf-8
-set encoding=utf-8
-set fileencoding=utf-8  
-set fileencodings=ucs-bom,utf-8,chinese  
-set guifont=Courier_New:h12:cANSI
-syntax on
-set ruler
-set foldenable
-set foldmethod=manual
-set background=dark  "背景颜色
-set nocompatible  
-colorscheme murphy
-set nobackup
-set showmatch
-set matchtime=1
-set scrolloff=3
-set smartindent
-set autoindent
-set cindent
-set tags=tags;
-set autochdir
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set noexpandtab
-
-set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}   "状态栏
-set autoread
-autocmd FileType c,cpp map <buffer> <leader><space> :w<cr>:make<cr>
-set completeopt=preview,menu
-filetype plugin on
-set clipboard+=unnamed
-:set makeprg=g++\ -Wall\ \ %
-set magic                   
-set guioptions-=T           
-set guioptions-=m           
-:set wrap
-
-set nocompatible              " be iMproved
-filetype off                  " required!
-
-set rtp+=$VIMRUNTIME/vundle
-call vundle#rc()
-
-" let Vundle manage Vundle
-" required! 
-Bundle 'gmarik/vundle'
-" My bundles here:
-"
-" original repos on GitHub
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'vim-scripts/taglist.vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'tpope/vim-fugitive'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-Bundle 'tpope/vim-rails.git'
-Bundle 'vim-scripts/AutoComplPop'
-Bundle 'kien/ctrlp.vim'
-"Bundle 'davidhalter/jedi-vim'
-Bundle 'L9'
-Bundle 'git://git.wincent.com/command-t.git'
-Bundle 'tlvince/vim-compiler-python'
-Bundle 'vim-scripts/pythoncomplete'
-filetype plugin indent on     " required!
-
 let mapleader = ","
-"====================vim-powerline==================
-let g:Powerline_symbols = 'fancy'
-set laststatus=2
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" lternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+Plugin 'preservim/nerdtree'
+Plugin 'taglist.vim'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'fatih/vim-go'
+Plugin 'SirVer/ultisnips'
+Plugin 'AndrewRadev/splitjoin.vim'
+Plugin 'neoclide/coc.nvim', {'branch': 'master'}
+" plugin from http://vim-scripts.org/vim/scripts.html
+" Plugin 'L9'
+" Git plugin not hosted on GitHub
+Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+" Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+" Plugin 'ascenator/L9', {'name': 'newL9'}
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just
+" :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+"
+"
+"
+"
+"
+"====================needtree==================
+" autocmd VimEnter * NERDTree " 鎵撳紑灏卞惎鍔ㄤ晶杈规爮
+nnoremap <leader>n :NERDTreeToggle<CR>
 
 "====================taglist==================
-let Tlist_Show_One_File = 1            "不同时显示多个文件的tag，只显示当前文件的
-let Tlist_Exit_OnlyWindow = 1          "如果taglist窗口是最后一个窗口，则退出vim
-map <Leader>t :TlistToggle<CR> 
+nnoremap <leader>t :TlistToggle<CR>
+let Tlist_Use_Right_Window   = 1
 
-
-"====================needtree==================
-map <F3> :NERDTreeToggle<CR>
-
-"====================jedi-vim================
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_definitions_command = "<leader>d"
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>n"
-"智能补全可以用c-x c-o来做
-let g:jedi#completions_command = "<C-Space>"
-let g:jedi#rename_command = "<leader>r"
-let g:jedi#show_call_signatures = "1"
-let g:jedi#popup_on_dot = 1
-
-"====================ctrlp===================
-let g:ctrlp_map = '<c-p>'
-
-"====================pythoncomplete==========
-autocmd FileType python runtime! autoload/pythoncomplete.vim
-
-"=======================key map==========
+"====================key鏄犲皠==================
 map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
-vnoremap <Leader>s :sort<CR>
-"Useful settings
-set history=700
-set undolevels=700
-"select autocomplete
-set completeopt=longest,menuone
-function! OmniPopup(action)
-     if pumvisible()
-        if a:action == 'j'
-            return "\<C-N>"
-        elseif a:action == 'k'
-            return "\<C-P>"
-        endif
-    endif
-    return a:action
+
+:nnoremap ga ^
+:nnoremap ge $
+
+vnoremap <c-c> "+y
+"====================powerline==================
+set laststatus=2
+set t_Co=256
+python3 from powerline.vim import setup as powerline_setup
+python3 powerline_setup()
+python3 del powerline_setup
+
+
+"====================go==================
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+autocmd FileType go nmap <c-g>  <Plug>(go-def)
+autocmd FileType go nmap <leader>b  <Plug>(go-build)
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
+autocmd FileType go nmap <leader>t  <Plug>(go-test)
+
+"====================coc==================
+let g:coc_disable_startup_warning = 1
+
+function! s:check_back_space() abort
+	let col = col('.') - 1
+	return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
-inoremap <silent>j <C-R>=OmniPopup('j')<CR>
-inoremap <silent>k <C-R>=OmniPopup('k')<CR>
 
-inoremap ( ()<ESC>i
-inoremap ) <c-r>=ClosePair(')')<CR>
-inoremap { {}<ESC>i
-inoremap } <c-r>=ClosePair('}')<CR>
-inoremap [ []<ESC>i
-inoremap ] <c-r>=ClosePair(']')<CR>
 
-imap ff <Esc>k 
-set whichwrap=b,s,<,>,[,]  "让退格，空格，上下箭头遇到行首行尾时自动移到下一行（包括insert模式）
-"使用tab键来代替%进行匹配跳转
-nnoremap <tab> %
-vnoremap <tab> %
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+
+
+
+
